@@ -90,7 +90,7 @@ const locations = [
       "Go to town square",
       "Go to town square",
     ],
-    "button functions": [goTown, goTown, goTown],
+    "button functions": [goTown, goTown, easterEgg],
     text: 'The monster screams "Arg!!" as it dies. You gain experience points and found gold.',
   },
   {
@@ -164,7 +164,7 @@ function buyWeapon() {
         let newWeapon = weapons[currentWeapon].name;
         text.innerText += "You now have a " + newWeapon + ".";
         inventory.push(newWeapon);
-        text.innerText += " In your inventory you have: " + inventory;
+        text.innerText += " In your inventory you have: " + inventory + ".\n";
         } else {
         text.innerText = "You do not have enough gold to buy a weapon.";
         }
@@ -289,6 +289,22 @@ function pick(guess) {
     const numbers = [];
     while(numbers.length < 10) {
         numbers.push(Math.floor(Math.random() * 11));
+    }
+    text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
+    for(let i = 0; i < 10; i++) {
+        text.innerText += numbers[i] + "\n";
+    }
+    if(numbers.includes(guess)) {
+        text.innerText += "Right! You win 20 gold!";
+        gold += 20;
+        goldText.innerText = gold;
+    } else {
+        text.innerText += "Wrong! You lose 10 health!";
+        health -= 10;
+        healthText.innerText = health;
+        if(health <= 0) {
+            lose();
+        }
     }
 }
 
